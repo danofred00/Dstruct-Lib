@@ -1,7 +1,7 @@
 
-#ifndef __DSTRUCT_DEF__
+#ifndef __DSTRUCT_CONST__
 
-    #define __DSTRUCT_DEF__
+    #define __DSTRUCT_CONST__
 
 
 #endif

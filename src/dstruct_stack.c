@@ -1,7 +1,7 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include <stack.h>
+#include <dstruct_stack.h>
 
 
 // ************************************
@@ -15,6 +15,7 @@ Stack stack_create() {
     
     stack->first = NULL;
     stack->size = 0;
+    stack->callback = NULL;
 
     return stack;
 }
@@ -24,6 +25,7 @@ Stack stack_create() {
 BOOL stack_empty(Stack st) {
     
     CHECK_IF_STACK(st);
+    
     return st == 0;
  
 }
@@ -78,6 +80,9 @@ BOOL stack_pop(Stack st) {
     StackElement *current = st->first;
     if(current) {
         st->first = current->next;
+        if(current->data)
+            free(current->data);
+            
         free(current);
         st->size--;
         return TRUE;

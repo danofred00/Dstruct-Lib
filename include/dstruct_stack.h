@@ -7,7 +7,6 @@
     #include <dstruct_types.h>
     #include <dstruct_const.h>
     #include <dstruct_def.h>
-    #include <assert.h>
 
     typedef struct _StackElement StackElement;
     struct _StackElement{
@@ -15,13 +14,14 @@
         StackElement *next;
     };
 
-    typedef struct _Stack {
+    typedef struct _Stack *Stack;
+    struct _Stack {
 
         StackElement *first;
         size_t size;
         DstructCallbackFunc callback;
 
-    } *Stack;
+    };
 
     // methods
 
@@ -74,9 +74,8 @@
          */
         extern BOOL stack_push_char(Stack st, char data);
 
-
         /**
-         * @brief 
+         * @brief Push value as float
          * 
          * @param st 
          * @param data 
@@ -84,6 +83,13 @@
          */
         extern BOOL stack_push_float(Stack st, float data);
 
+        /**
+         * @brief push value as double
+         * 
+         * @param st 
+         * @param data 
+         * @return BOOL 
+         */
         extern BOOL stack_push_double(Stack st, double data);
 
         /**
@@ -95,6 +101,12 @@
          */
         extern BOOL stack_pop(Stack st);
 
+        /**
+         * @brief Get the size of the stack
+         * 
+         * @param st 
+         * @return size_t 
+         */
         extern size_t stack_size(Stack st);
 
         /**
