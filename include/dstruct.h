@@ -4,7 +4,7 @@
  *
  *
  *
- *
+ * @file dstruct.h
  * @version 1.0.0 
  * @author Daniel Leussa
  */

@@ -19,6 +19,7 @@
 
         ListElement *first;
         size_t size;
+        size_t size_of_elt;
         DstructCallbackFunc callback;
 
     };
@@ -32,11 +33,13 @@
     #endif
 
         /**
-            @brief Create the list structure
-            @return List if the list is successful created
-            @return NULL if have some error
+         * @brief Create the list structure
+         *
+         * @param size_of_elt The fixed size of element in list
+         * @return List if the list is successful created
+         * @return NULL if have some error
         */
-        extern List list_create();
+        extern List list_create(int size_of_elt);
 
         /**
             @brief Check is the list is empty
@@ -50,11 +53,9 @@
          * 
          * @param li - List in where we want to add data 
          * @param data - the data to add in list
-         * @param size_of_data - the size of this data. Given by sizeof() function if you use your
-         * custom structure or type
          * @return BOOL - TRUE if value is added and FALSE if else  
          */
-        extern BOOL list_append(List li, pointer data, size_t size_of_data);
+        extern BOOL list_append(List li, pointer data);
 
         /**
          * @brief To add int value in list
@@ -100,6 +101,8 @@
          * @return BOOL TRUE if success and FALSE if failed
          */
         extern BOOL list_remove_first(List li);
+
+        extern BOOl list_remove(List li, int index);
 
         /**
          * @brief Get the size of the list
@@ -170,16 +173,15 @@
         /**
          * @brief Insert data at the specific index
          * 
-         * @example list_insert(list, &data, sizeof(data), 0);
+         * @example list_insert list_insert(list, &data, sizeof(data), 0);
          * 
          * @param li List in where we gonna insert data
          * @param data data to insert
-         * @param _size size of the data
          * @param index index to insert value
          * @return TRUE if value inserted with success
          * @return FALSE if failed 
          */
-        extern BOOL list_insert(List li, pointer data, size_t _size, int index);
+        extern BOOL list_insert(List li, pointer data, int index);
 
         /**
          * @brief Get data at the specific index
@@ -196,9 +198,26 @@
          * 
          * @param li List
          * @param data pointer
-         * @param _size int
          */
-        extern void list_prepend(List li, pointer data, size_t _size);
+        extern void list_prepend(List li, pointer data);
+
+        /**
+         * @brief Concat _src List to _dest
+         * 
+         * @param _dest List
+         * @param _src List
+         * @return List Address of list concatened
+         */
+        extern List list_concat(List _dest, List _src);
+
+        /**
+         * @brief For-Each function
+         * 
+         * @param li List
+         * @param data Data to send for each element
+         * @param func The function to call for each element in list  
+         */
+        extern void list_foreach(List li, void (* func)(List li, pointer _elemt, int index, pointer data), pointer data);
 
         extern void list_show(List li);
 

@@ -5,7 +5,7 @@
 #include <dstruct_list.h>
 
 // **************************************
-List list_create() {
+List list_create(int size_of_elt) {
 
     List list = (List) malloc(sizeof(List));
     if(list == NULL)
@@ -14,6 +14,7 @@ List list_create() {
     list->first = NULL;
     list->callback = NULL;
     list->size = 0;
+    list->size_of_elt = size_of_elt ?? -1;
 
     return list;
 }
@@ -28,7 +29,7 @@ BOOL list_empty(List li) {
 
 // **************************************
 
-BOOL list_append(List li, pointer data, size_t size_of_data) {
+BOOL list_append(List li, pointer data) {
 
     CHECK_IF_LIST(li);
 
@@ -37,12 +38,12 @@ BOOL list_append(List li, pointer data, size_t size_of_data) {
     if(!current)
         return FALSE;
 
-    current->data = (pointer) malloc(size_of_data);
+    current->data = (pointer) malloc(li->size_of_elt);
     if(!current->data)
         return FALSE;
 
     // if everything is OK,  we can add the value in the list
-    memcpy(current->data, data, size_of_data);
+    memcpy(current->data, data, li->size_of_elt);
     current->next = NULL;
 
     if(!list_empty(li)) {
@@ -89,6 +90,10 @@ size_t list_size(List li) {
 }
 
 // ***************************************
+
+BOOl list_remove(List li, int index) {
+
+}
 
 BOOL list_remove_first(List li) {
 
@@ -161,7 +166,7 @@ char * list_get_first_to_string(List li)
 
 // ********************************************
 
-BOOL list_insert(List li, pointer data, size_t _size, int index)
+BOOL list_insert(List li, pointer data, int index)
 {
     CHECK_IF_LIST(li);
 
@@ -173,12 +178,12 @@ BOOL list_insert(List li, pointer data, size_t _size, int index)
     if(!current)
         return FALSE;
 
-    current->data = (pointer) malloc(_size);
+    current->data = (pointer) malloc(li->size_of_elt);
     if(!current->data)
         return FALSE;
 
     // if everything is OK,  we can add the value in the list
-    memcpy(current->data, data, _size);
+    memcpy(current->data, data, li->size_of_elt);
     //current->next = NULL;
 
     if(index > 0) {
@@ -217,9 +222,43 @@ void list_prepend(List li, pointer data, size_t _size) {
 
     CHECK_IF_LIST(li);
 
-    list_insert(li, data, _size, 0);
+    list_insert(li, data, 0);
 }
 
+// *********************************************
+
+List list_concat(List _dest, List _src) {
+
+    CHECK_IF_LIST(_dest);
+    CHECK_IF_LIST(_src);
+
+    ListElement * __dest, __src;
+    
+    __src = _src->first;
+
+    if(_dest->first)
+        __dest = _dest->first;
+
+    return _dest;
+}
+
+// *********************************************
+
+void list_foreach(List li, void (* func)(List li, pointer _elemt, int index, pointer data), pointer data) {
+
+    CHECK_IF_LIST(li);
+
+    ListElement *tmp = li->first;
+
+    int i = 0;
+    while(tmp) {
+        func(li, tmp->data, i, data);
+        tmp = tmp->next;
+        i++;
+    }
+}
+
+// *********************************************
 
 void list_show(List li) {
 
