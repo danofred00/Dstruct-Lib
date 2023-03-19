@@ -91,7 +91,7 @@ size_t list_size(List li) {
 
 // ***************************************
 
-BOOl list_remove(List li, int index) {
+BOOL list_remove(List li, int index) {
 
 }
 
