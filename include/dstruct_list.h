@@ -102,7 +102,7 @@
          */
         extern BOOL list_remove_first(List li);
 
-        extern BOOl list_remove(List li, int index);
+        extern BOOL list_remove(List li, int index);
 
         /**
          * @brief Get the size of the list
