@@ -4,8 +4,8 @@
     #define __QUEUE_H__
 
     // includes
-    #include <dstruct_types.h>
-    #include <dstruct_const.h>
+    #include <dstruct/dstruct_types.h>
+    #include <dstruct/dstruct_const.h>
 
     typedef struct _QueueElement {
 

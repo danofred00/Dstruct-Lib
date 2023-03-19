@@ -2,7 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <dstruct_list.h>
+#include <dstruct/dstruct_list.h>
+
 
 // **************************************
 List list_create(int size_of_elt) {

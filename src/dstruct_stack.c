@@ -1,7 +1,7 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include <dstruct_stack.h>
+#include <dstruct/dstruct_stack.h>
 
 
 // ************************************

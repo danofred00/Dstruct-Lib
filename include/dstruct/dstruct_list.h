@@ -4,9 +4,9 @@
     #define __LIST_H__
 
     // includes
-    #include <dstruct_types.h>
-    #include <dstruct_const.h>
-    #include <dstruct_def.h>
+    #include <dstruct/dstruct_types.h>
+    #include <dstruct/dstruct_const.h>
+    #include <dstruct/dstruct_def.h>
 
     typedef struct _ListElement ListElement;
     struct _ListElement {
